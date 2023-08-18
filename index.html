@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laugh</title>
+    <style>
+
+     @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Parisienne&family=Roboto:wght@100&display=swap');
+
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: rgb(93, 104, 220);
+            height: 100vh;
+            font-family: Roboto;
+        }
+
+        .container{
+            background-color: #fff;
+            padding: 2rem;
+            display: flex;
+            flex-flow: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            /* width: 30vw; */
+        }
+
+        .container span, .container h3{
+            padding: 1rem 0;
+        }
+
+        .container span{
+             color: gray;
+             font-size: 1.4rem;
+             /* font-family: Roboto;  */
+       }
+
+        .container button{
+            margin: 1rem 0;
+            padding: 0.7rem 1rem;
+            background-color: blueviolet;
+            color: #fff;
+            border-radius: 6px;
+            border: transparent;
+        }
+
+        @media screen and (min-width: 989px) {
+            .container{
+                width: 30vw;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <span>Dont Laugh Challenge</span>
+        <h3 id="joke"></h3>
+        <button class="btn">Get Another Joke</button>
+    </div>
+    <script>
+        //curl is used to get api
+        //server = reseources that we want
+      jokeEl = document.querySelector('#joke')
+      btn = document.querySelector('.btn')
+
+      window.addEventListener('load', (event)=>{
+        getJoke()
+      })
+
+      btn.addEventListener('click', ()=>{
+        getJoke()
+      })
+
+      async function getJoke(){
+     const response = await fetch('https://icanhazdadjoke.com', {
+          headers: {
+            'Accept': 'application/json'
+          }
+     })
+
+     const jokes = await response.json();
+     console.log(jokes)
+
+     jokeEl.innerHTML = jokes.joke
+      }
+
+    </script>
+    
+</body>
+</html>
